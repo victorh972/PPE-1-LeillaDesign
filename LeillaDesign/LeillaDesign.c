@@ -28,7 +28,7 @@ void clef(char mdp[50],char text[1024], int decalage)         // fonction pour c
 	int Key = 0;                            // calcule de la clef K
 	int hash = 0;                         // calcul du hash
 	int longueurmdp = strlen (mdp);                 // longeur du mdp
-	int m = strlen(text);                  // longeur du text
+	int longueurtext = strlen(text);                  // longeur du text
 	int asci ;                            // code asci
 	int asciText ;                        // code asci des characteres du mot de passe
 
@@ -73,7 +73,7 @@ void clef(char mdp[50],char text[1024], int decalage)         // fonction pour c
 		}
 	}
 	// calcule du XOR
-	for (k = 0 ; k < m ; k++)    //boucle conversion string en characteres
+	for (k = 0 ; k < longueurtext ; k++)    //boucle conversion string en characteres
 	{
 		conversion_XOR = text[k];        // string en characteres
 		conversion_XOR = conversion_XOR ^ Key ;      // XOR des characteres avec la clef Key
@@ -96,7 +96,7 @@ void clefd (char mdp[50], char text[1024] , int decalage)
 	int Key = 0;                     // la clef K
 	int hash = 0;                  // calcul du hash
 	int longueurmdp = strlen (mdp); // longeur du string mdp
-	int m = strlen(text);           // longeur du string ces
+	int longueurtext = strlen(text);           // longeur du string ces
 	int asci ;                     // code asci
 	int asciText ;
 	// code asci des characteres du mot de passe
@@ -109,10 +109,10 @@ void clefd (char mdp[50], char text[1024] , int decalage)
 	}
 
 	// le calcule du K
-	Key = hash ^ decalage ;         //calcul de la clef K
+	Key = hash ^ decalage ;  //calcul de la clef K
 
 	// cryptage XOR des characteres du text
-	for (k = 0 ; k < m ; k++)  // boucle  conversion string en characteres
+	for (k = 0 ; k < longueurtext ; k++)  // boucle  conversion string en characteres
 	{
 		conversion_XOR = text[k];      // string en characteres
 		conversion_XOR = conversion_XOR ^ Key ;     // XOR de chaque characteres du text et la clef K
