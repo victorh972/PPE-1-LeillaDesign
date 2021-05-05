@@ -45,7 +45,7 @@ void clef_de_chiffrement(char mdp[50],char text[1024], int decalage)         // 
 	// cryptage cesar
 	for ( j = 0 ; text[j] != '\0' ; ++j )     // boucle conversion string en characteres
 	{
-		conversion_charactere = text[j] ;                            // conversion string en characteres
+		conversion_charactere = text[j] ;     // conversion string en characteres
 		asci = conversion_charactere ;
 		// pour les characteres minuscules
 		if ( asci >= 97 && asci <= 122 )          // condition que les characters sont alphabet
@@ -56,7 +56,7 @@ void clef_de_chiffrement(char mdp[50],char text[1024], int decalage)         // 
 				asci = asci - 26 ; // si charactere cryptee  est plus que le Z on la retourne comme aplhabet
 			}
 			conversion_charactere = asci ;
-			text[j]= conversion_charactere ;                    // retours en boucle
+			text[j]= conversion_charactere ;   // retours en boucle jusqu'à ce que tous les charactere soit convertits
 
 		}
 
@@ -69,7 +69,7 @@ void clef_de_chiffrement(char mdp[50],char text[1024], int decalage)         // 
 			asci = asci - 26 ;  // si charactere cryptee  est plus que le Z on la retourne comme aplhabet
 		}
 		conversion_charactere = asci ;                       // conversion asci en characteres
-		text[j]= conversion_charactere ;                      // retours en boucle
+		text[j]= conversion_charactere ;                      // retours en boucle jusqu'à ce que tous les charactere soit convertits
 		}
 	}
 	// calcule du XOR
@@ -133,7 +133,7 @@ void clef_de_dechiffrement (char mdp[50], char text[1024] , int decalage)
 				asci = asci + 26 ;  // si le code asci  est moins de a on la retourne en alphabet
 			}
 			conversion_charactere = asci ;                // conversion asci en characteres
-            text[j]= conversion_charactere ;              // retour en boucle
+            text[j]= conversion_charactere ;              // retour en boucle jusqu'à ce que tous les charactere soit convertits
 		}
 
 		// pour les characteres majuscules
@@ -145,7 +145,7 @@ void clef_de_dechiffrement (char mdp[50], char text[1024] , int decalage)
 				asci = asci + 26 ; // si le code asci  est moins de a on la retourne en alphabet
 			}
 			conversion_charactere= asci ;                    // conversion asci en characteres
-			text[j]=conversion_charactere;                  // retour en boucle
+			text[j]=conversion_charactere;                  // retour en boucle jusqu'à ce que tous les charactere soit convertits
 		}
 	}
 }
@@ -214,7 +214,7 @@ void cryptage (char text[1024],char mdp[50])
                                  printf("inserez votre mot de passe\n\n");
                                         scanf("%s" ,mdp);
 
-                        clef_de_chiffrement(mdp,text,decalage);
+                        clef_de_chiffrement(mdp,text,decalage);// crypte le message contenu dans le fichier.txt.
                         fprintf(fichier,"%s", text);
                         fclose(fichier);
                         printf("---------------------------------------------------------------------------------------------------------\n");
@@ -242,7 +242,7 @@ void cryptage (char text[1024],char mdp[50])
                  scanf("%d", &decalage);
                  printf("\ninserez votre mot de passe\n\n");
                  scanf("\n%s" ,mdp);
-                 clef_de_chiffrement(mdp,text,decalage);
+                 clef_de_chiffrement(mdp,text,decalage);// crypte le message contenu dans le textclaire.txt
         fprintf(fichier,"%s", text);
         fclose(fichier);
         printf("---------------------------------------------------------------------------------------------------------\n");
@@ -313,7 +313,7 @@ void decryptage(char text[1024], char mdp[50])
                 }
             printf("\ninserez votre mot de passe\n\n");
             scanf("%s" ,mdp);
-            clef_de_dechiffrement(mdp,text,decalage);
+            clef_de_dechiffrement(mdp,text,decalage); // décrypte le message crypté contenu dans le fichier.txt
             fprintf(fichier,"%s", text);
             fclose(fichier);
             printf("---------------------------------------------------------------------------------------------------------\n");
@@ -342,7 +342,7 @@ void decryptage(char text[1024], char mdp[50])
             printf("\ninserez votre mot de passe\n\n");
             scanf("%s" ,mdp);
 
-            clef_de_dechiffrement(mdp,text,decalage);
+            clef_de_dechiffrement(mdp,text,decalage);// décrypte le message crypté contenu dans le fichier.txt
             fprintf(fichier,"voici le message decypte est : %s", text);
             fclose(fichier);
             printf("---------------------------------------------------------------------------------------------------------\n");
@@ -361,7 +361,7 @@ int main(void)
     // variables
     char text[1024] ;// message
     char mdp[50]; // mot de passe
-    char  choix;
+    char  choix; // choix permettant de commencer ou recommencer et de quitter le programme
     int choix2; // choix de decryptage ou de decryptage
 
     printf("-----------------------------------------------------------------------------------------------------------------------\n");
