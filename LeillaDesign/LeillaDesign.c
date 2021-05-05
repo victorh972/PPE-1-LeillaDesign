@@ -24,29 +24,29 @@ void clef(char mdp[50],char text[1024], int decalage)         // fonction pour c
 {
 	//variables locaux
 	int  i , j , k ;                      // indices des boucles
-	char ch, c , c1 ;                     // characteres pour les conversions
-	int K = 0;                            // calcule de la clef K
+	char conversion_charactere, conversion_mdp , conversion_XOR ; // characteres pour les conversions
+	int Key = 0;                            // calcule de la clef K
 	int hash = 0;                         // calcul du hash
-	int n = strlen (mdp);                 // longeur du mdp
+	int longueurmdp = strlen (mdp);                 // longeur du mdp
 	int m = strlen(text);                  // longeur du text
 	int asci ;                            // code asci
 	int asciText ;                        // code asci des characteres du mot de passe
 
 	//calcule du hash entre les characteres
-	for ( i = 0 ; i < n ; i++)               // boucle conversion string en characteres
+	for ( i = 0 ; i < longueurmdp ; i++)               // boucle conversion string en characteres
 	{
-		c= mdp[i] ;                          // conversion string en characteres
-		asciText = c ;                       // conversion code characteres en code asci
+		conversion_mdp= mdp[i] ;                          // conversion string en characteres
+		asciText = conversion_mdp ;                       // conversion code characteres en code asci
 		hash ^= asciText ;                          // calcul du hash
 	}
-	// le calcule du K
-	K = hash ^ decalage ; // calcule de la clef K
+	// cle Key
+	Key = hash ^ decalage ; // calcule de la clef Key
 
 	// cryptage cesar
 	for ( j = 0 ; text[j] != '\0' ; ++j )     // boucle conversion string en characteres
 	{
-		ch = text[j] ;                            // conversion string en characteres
-		asci = ch ;
+		conversion_charactere = text[j] ;                            // conversion string en characteres
+		asci = conversion_charactere ;
 		// pour les characteres minuscules
 		if ( asci >= 97 && asci <= 122 )          // condition que les characters sont alphabet
 		{
@@ -55,29 +55,29 @@ void clef(char mdp[50],char text[1024], int decalage)         // fonction pour c
 			{
 				asci = asci - 26 ; // si charactere cryptee  est plus que le Z on la retourne comme aplhabet
 			}
-			ch = asci ;
-			text[j]= ch ;                    // retours en boucle
+			conversion_charactere = asci ;
+			text[j]= conversion_charactere ;                    // retours en boucle
 
 		}
 
 	// pour les characteres majuscules
 	else if ( asci >= 65  && asci  <= 90 )      // condition que les characters sont alphabet
 	{
-		asci = asci + decalage ;               //  cryptage cesar
+		asci = asci + decalage ;         //  cryptage cesar
 		if ( asci > 90)
 		{
-			asci = asci - 26 ;        // si charactere cryptee  est plus que le Z on la retourne comme aplhabet
+			asci = asci - 26 ;  // si charactere cryptee  est plus que le Z on la retourne comme aplhabet
 		}
-		ch = asci ;                       // conversion asci en characteres
-		text[j]= ch ;                      // retours en boucle
+		conversion_charactere = asci ;                       // conversion asci en characteres
+		text[j]= conversion_charactere ;                      // retours en boucle
 		}
 	}
 	// calcule du XOR
 	for (k = 0 ; k < m ; k++)    //boucle conversion string en characteres
 	{
-		c1 = text[k];        // string en characteres
-		c1 = c1 ^ K ;      // XOR des characteres avec la clef K
-		text[k]= c1 ;      // retours en string
+		conversion_XOR = text[k];        // string en characteres
+		conversion_XOR = conversion_XOR ^ Key ;      // XOR des characteres avec la clef Key
+		text[k]= conversion_XOR ;      // retours en string
 
 	}
 }
@@ -92,39 +92,39 @@ void clefd (char mdp[50], char text[1024] , int decalage)
 {
 	//variables locaux
 	int  i , j ,k ;                // indices des boucles
-	char ch, c ,c1;                // characteres pour les conversions
-	int K = 0;                     // la clef K
+	char conversion_charactere, conversion_mdp , conversion_XOR ;// characteres pour les conversions
+	int Key = 0;                     // la clef K
 	int hash = 0;                  // calcul du hash
-	int n = strlen (mdp);          // longeur du string mdp
+	int longueurmdp = strlen (mdp); // longeur du string mdp
 	int m = strlen(text);           // longeur du string ces
 	int asci ;                     // code asci
 	int asciText ;
 	// code asci des characteres du mot de passe
 	//calcule du hash entre les characteres
-	for ( i = 0 ; i < n ; i++)  // boucle  conversion string en characteres
+	for ( i = 0 ; i < longueurmdp ; i++)  // boucle  conversion string en characteres
 	{
-		c= mdp[i] ;             // string en characteres
-		asciText = c;           // characteres en code asci
+		conversion_mdp= mdp[i] ;             // string en characteres
+		asciText = conversion_mdp;           // characteres en code asci
 		hash ^= asciText ;      // hash( XOR entre les characteres du mdp)
 	}
 
 	// le calcule du K
-	K = hash ^ decalage ;         //calcul de la clef K
+	Key = hash ^ decalage ;         //calcul de la clef K
 
 	// cryptage XOR des characteres du text
 	for (k = 0 ; k < m ; k++)  // boucle  conversion string en characteres
 	{
-		c1 = text[k];      // string en characteres
-		c1 = c1 ^ K ;     // XOR de chaque characteres du text et la clef K
-		text[k]= c1 ;      // retours du code cryptee en string
+		conversion_XOR = text[k];      // string en characteres
+		conversion_XOR = conversion_XOR ^ Key ;     // XOR de chaque characteres du text et la clef K
+		text[k]= conversion_XOR ;      // retours du code cryptee en string
 	}
    //decryptage du code cesar
 	for ( j = 0 ; text[j] != '\0' ; ++j ) // boucle conversion string en characteres
 	{
-		ch = text[j] ;                       // string en characteres
-		asci = ch ;
+		conversion_charactere = text[j] ;  // string en characteres
+		asci = conversion_charactere;
 
-		// pour les characteres minuscules
+		// pour les charactere minuscules
 		if ( asci >= 97  && asci <= 122 )       // condition que les characters sont des alphabetes
 		{
 			asci = asci - decalage ;          // decryptage cesar des codes asci
@@ -132,8 +132,8 @@ void clefd (char mdp[50], char text[1024] , int decalage)
 			{
 				asci = asci + 26 ;  // si le code asci  est moins de a on la retourne en alphabet
 			}
-            ch = asci ;                // conversion asci en characteres
-            text[j]= ch ;              // retour en boucle
+			conversion_charactere = asci ;                // conversion asci en characteres
+            text[j]= conversion_charactere ;              // retour en boucle
 		}
 
 		// pour les characteres majuscules
@@ -144,8 +144,8 @@ void clefd (char mdp[50], char text[1024] , int decalage)
 			{
 				asci = asci + 26 ; // si le code asci  est moins de a on la retourne en alphabet
 			}
-			ch = asci ;                    // conversion asci en characteres
-			text[j]= ch ;                  // retour en boucle
+			conversion_charactere= asci ;                    // conversion asci en characteres
+			text[j]=conversion_charactere;                  // retour en boucle
 		}
 	}
 }
