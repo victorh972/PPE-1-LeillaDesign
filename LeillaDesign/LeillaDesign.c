@@ -20,7 +20,7 @@
 // ensuite on effectue un chiffrement de césar sur le message dans un premier temps
 // puis dans un second temps on crypte le message en XOR
 
-void clef(char mdp[50],char text[1024], int decalage)         // fonction pour calculer la clef pour le chiffrage
+void clef_de_chiffrement(char mdp[50],char text[1024], int decalage)         // fonction pour calculer la clef pour le chiffrage
 {
 	//variables locaux
 	int  i , j , k ;                      // indices des boucles
@@ -88,7 +88,7 @@ void clef(char mdp[50],char text[1024], int decalage)         // fonction pour c
 // ensuite on effectue un XOR sur le message dans un premier temps
 // puis dans un second temps on decrypte le message grace au chiffremment de césar pour avoir un teste claire
 
-void clefd (char mdp[50], char text[1024] , int decalage)
+void clef_de_dechiffrement (char mdp[50], char text[1024] , int decalage)
 {
 	//variables locaux
 	int  i , j ,k ;                // indices des boucles
@@ -158,7 +158,7 @@ void clefd (char mdp[50], char text[1024] , int decalage)
 //et ensuite on ouvre un autre fichier et on insert le message crypter par la fonction clef
 // dans l'autres cas on demande a l'utilisateur de creer son fichier texte, puis d'inserer sont message, ensuite on
 
-void encrypt (char text[1024],char mdp[50])
+void cryptage (char text[1024],char mdp[50])
 {
     // variables locaux
 		char newfichier[100];
@@ -214,7 +214,7 @@ void encrypt (char text[1024],char mdp[50])
                                  printf("inserez votre mot de passe\n\n");
                                         scanf("%s" ,mdp);
 
-                        clef(mdp,text,decalage);
+                        clef_de_chiffrement(mdp,text,decalage);
                         fprintf(fichier,"%s", text);
                         fclose(fichier);
                         printf("---------------------------------------------------------------------------------------------------------\n");
@@ -242,7 +242,7 @@ void encrypt (char text[1024],char mdp[50])
                  scanf("%d", &decalage);
                  printf("\ninserez votre mot de passe\n\n");
                  scanf("\n%s" ,mdp);
-                 clef(mdp,text,decalage);
+                 clef_de_chiffrement(mdp,text,decalage);
         fprintf(fichier,"%s", text);
         fclose(fichier);
         printf("---------------------------------------------------------------------------------------------------------\n");
@@ -261,7 +261,7 @@ void encrypt (char text[1024],char mdp[50])
 // qui va contenir le message decrypter
 // la fonction clefd decrypte le message et le message est ecrit dans le fichier creer juste avant
 
-void decrypt(char text[1024], char mdp[50])
+void decryptage(char text[1024], char mdp[50])
 {
     // variables locaux
 
@@ -313,7 +313,7 @@ void decrypt(char text[1024], char mdp[50])
                 }
             printf("\ninserez votre mot de passe\n\n");
             scanf("%s" ,mdp);
-            clefd(mdp,text,decalage);
+            clef_de_dechiffrement(mdp,text,decalage);
             fprintf(fichier,"%s", text);
             fclose(fichier);
             printf("---------------------------------------------------------------------------------------------------------\n");
@@ -342,7 +342,7 @@ void decrypt(char text[1024], char mdp[50])
             printf("\ninserez votre mot de passe\n\n");
             scanf("%s" ,mdp);
 
-            clefd(mdp,text,decalage);
+            clef_de_dechiffrement(mdp,text,decalage);
             fprintf(fichier,"voici le message decypte est : %s", text);
             fclose(fichier);
             printf("---------------------------------------------------------------------------------------------------------\n");
@@ -388,7 +388,7 @@ int main(void)
 
        if(choix2==1)
        {
-            encrypt(text,mdp);
+    	   cryptage(text,mdp);
             printf("voici le code cryptee: %s\n\n", text);
        }
        if(choix2==2)
